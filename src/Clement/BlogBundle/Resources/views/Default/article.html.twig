@@ -9,7 +9,7 @@
     </div>
     <div class="glob">
         <div class="listcomm">
-            Commentaire <br class="bigbr"/>
+            Commentaires <br class="bigbr"/>
             {% if commentaires %}
                 {% for commentaire in commentaires %}
                     <div class="comm">
@@ -19,7 +19,8 @@
                         {% elseif 'ROLE_USER' in commentaire.auteur.roles %}
                             User
                         {% endif %}<br/>
-                        {{ commentaire.contenu }}
+                        {{ commentaire.contenu }}<br/>
+                        {{ commentaire.date|date('d/m/Y H:i:s') }}
                     </div>
                 {% endfor %}
             {% else %}
