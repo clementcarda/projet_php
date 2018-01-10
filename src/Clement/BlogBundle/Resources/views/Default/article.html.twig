@@ -1,0 +1,41 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block title %}{{ parent() }} | Blog {% endblock %}
+
+{% block body %}
+    <h1>{{ article.titre }}</h1>
+    <div class="article">
+        {{ article.contenu }}
+    </div>
+    <div class="glob">
+        <div class="listcomm">
+            Commentaire <br class="bigbr"/>
+            {% if commentaires %}
+                {% for commentaire in commentaires %}
+                    <div class="comm">
+                        {{ commentaire.auteur.username }}
+                        {% if 'ROLE_SUPER_ADMIN' in commentaire.auteur.roles or 'ROLE_ADMIN' in commentaire.auteur.roles %}
+                            Admin
+                        {% elseif 'ROLE_USER' in commentaire.auteur.roles %}
+                            User
+                        {% endif %}<br/>
+                        {{ commentaire.contenu }}
+                    </div>
+                {% endfor %}
+            {% else %}
+                Soyez le premier à écrire un commentaire
+            {% endif %}
+        </div>
+        <div class="formcomm">
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                Commentaire
+                {{ form_start(form) }}
+                {{ form_widget(form.contenu) }}<br/>
+                {{ form_widget(form.Commenter) }}
+                {{ form_end(form) }}
+            {% else %}
+                Vous devez vous identifier pour pouvoir écrire un commentaire
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

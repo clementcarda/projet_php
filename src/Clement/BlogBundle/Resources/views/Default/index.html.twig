@@ -1,0 +1,15 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block body %}
+    <div class="principal">
+        {% for article in articles %}
+            <a class="titrearticle" href="{{ path('blog_showarticle', {'id': article.id}) }}"> {{ article.titre }}</a><br/>
+            {{ article.contenu | truncate(100,false, '...') }}<br class="bigbr"/>
+        {% endfor %}
+    </div>
+    <div class="searchbar">
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

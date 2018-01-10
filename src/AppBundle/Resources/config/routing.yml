@@ -1,0 +1,7 @@
+homepage:
+  path: /
+  defaults: {_controller: AppBundle:Default:index}
+
+showcv:
+  path: /cv
+  defaults: {_controller: AppBundle:Cv:showCv}
