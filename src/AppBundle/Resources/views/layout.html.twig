@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html {% block html_attributes %}{% endblock %}>
 <head>
+    {% block meta_tags %}
     <meta charset="UTF-8" />
-    <title>{% block title %}Clément CARDARELLI{% endblock %}</title>
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" media="screen, projection"/>
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet"/>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    {% endblock %}
+    <title>{% block title %}Clément CARDARELLI{% endblock %}</title>
 </head>
 <body>
 

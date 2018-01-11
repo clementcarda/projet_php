@@ -4,7 +4,6 @@ namespace Clement\BlogBundle\Controller;
 
 use Clement\BlogBundle\Entity\Article;
 use Clement\BlogBundle\Entity\Commentaire;
-use Clement\BlogBundle\form\ArticleType;
 use Clement\BlogBundle\form\CommentaireType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -18,6 +17,7 @@ class DefaultController extends Controller
     {
         $session = $request->getSession();
         $titre = $session->get('recherche');
+
 
         $form = $this->createFormBuilder()
             ->add('rechercher', TextType::class, array(
@@ -38,6 +38,8 @@ class DefaultController extends Controller
             ->getRepository('ClementBlogBundle:Article')
             ->findAllByArray($titre);
 
+        $session->set('recherche', null);
+
         return $this->render('ClementBlogBundle:Default:index.html.twig', [
             'articles' => $articles,
             'form' => $form->createView()
@@ -50,7 +52,7 @@ class DefaultController extends Controller
         if (!$article)
         {
             throw $this->createNotFoundException(
-                'Aucun article pour cet identifant'.$id
+                'Aucun article pour cet identifant '.$id
             );
         }
 
@@ -81,7 +83,8 @@ class DefaultController extends Controller
 
         }
 
-        $commentaires = $this->getDoctrine()->getRepository(Commentaire::class)->findByArticle($id);
+        $commentaires = $this->getDoctrine()
+            ->getRepository(Commentaire::class)->findByArticle($id);
 
         return $this->render('ClementBlogBundle:Default:article.html.twig', [
             'article' => $article,

@@ -88,7 +88,7 @@ file that was distributed with this source code.
 
         <title>
         {% block sonata_head_title %}
-            hhhhh
+            {{ 'Admin'|trans({}, 'SonataAdminBundle') }}
 
             {% if _title is not empty %}
                 {{ _title|striptags|raw }}
@@ -130,12 +130,9 @@ file that was distributed with this source code.
                 {% endblock %}
                 {% block logo %}
                     {% spaceless %}
-                        <a class="logo" href="{{ path('sonata_admin_dashboard') }}">
-                            {% if 'single_image' == sonata_admin.adminPool.getOption('title_mode') or 'both' == sonata_admin.adminPool.getOption('title_mode') %}
-                                <img src="{{ asset(sonata_admin.adminPool.titlelogo) }}" alt="{{ sonata_admin.adminPool.title }}">
-                            {% endif %}
+                        <a class="logo" href="{{ path('homepage') }}">
                             {% if 'single_text' == sonata_admin.adminPool.getOption('title_mode') or 'both' == sonata_admin.adminPool.getOption('title_mode') %}
-                                <span>{{ sonata_admin.adminPool.title }}</span>
+                                <span>Clement CARDARELLI</span>
                             {% endif %}
                         </a>
                     {% endspaceless %}

@@ -83,3 +83,6 @@ sonata_block:
         # enable the SonataAdminBundle block
         sonata.admin.block.admin_list:
             contexts: [admin]
+sonata_admin:
+    templates:
+        layout: "ClementBlogBundle:Admin:standard_layout.html.twig"
