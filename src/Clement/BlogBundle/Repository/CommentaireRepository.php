@@ -10,4 +10,9 @@ namespace Clement\BlogBundle\Repository;
  */
 class CommentaireRepository extends \Doctrine\ORM\EntityRepository
 {
+    /*public function findByArticle($id){
+        $qp = $this->createQueryBuilder('c')
+            ->where('c.article = '.$id);
+        return $qp->getQuery()->getArrayResult();
+    }*/
 }

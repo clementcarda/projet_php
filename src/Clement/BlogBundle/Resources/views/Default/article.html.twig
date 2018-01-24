@@ -10,8 +10,9 @@
     <div class="glob">
         <div class="listcomm">
             Commentaires <br class="bigbr"/>
-            {% if commentaires %}
-                {% for commentaire in commentaires %}
+
+            {% if article.commentaires %}
+                {% for commentaire in article.commentaires %}
                     <div class="comm">
                         {{ commentaire.auteur.username }}
                         {% if 'ROLE_SUPER_ADMIN' in commentaire.auteur.roles or 'ROLE_ADMIN' in commentaire.auteur.roles %}

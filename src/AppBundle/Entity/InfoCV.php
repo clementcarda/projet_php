@@ -92,6 +92,13 @@ class InfoCV
     private $competences;
 
     /**
+     * @var \Clement\BlogBundle\Entity\User
+     *
+     * @ORM\OneToOne(targetEntity="Clement\BlogBundle\Entity\User", inversedBy="cv")
+     */
+    private $auteur;
+
+    /**
      * Get id
      *
      * @return int
@@ -365,6 +372,29 @@ class InfoCV
     public function removeCompetence(\AppBundle\Entity\Competence $competence)
     {
         $this->competences->removeElement($competence);
+    }
+
+    /**
+     * set auteur
+     *
+     * @param \Clement\BlogBundle\Entity\User
+     *
+     * @return InfoCV
+     */
+    public function setAuteur(\Clement\BlogBundle\Entity\User $user)
+    {
+        $this->auteur = $user;
+        return $this;
+    }
+
+    /**
+     * get auteur
+     *
+     * @return \Clement\BlogBundle\Entity\User
+     */
+    public function getAuteur()
+    {
+        return $this->auteur;
     }
 }
 

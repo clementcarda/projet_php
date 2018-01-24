@@ -190,5 +190,15 @@ class Article
     {
         return $this->titre;
     }
+
+    /**
+     * get commentaires
+     *
+     * @return \Clement\BlogBundle\Entity\Commentaire
+     */
+    public function getCommentaires()
+    {
+        return $this->commentaires;
+    }
 }
 

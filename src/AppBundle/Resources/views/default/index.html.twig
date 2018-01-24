@@ -1,7 +1,7 @@
 {% extends 'AppBundle::layout.html.twig' %}
 
 {% block body %}
-    <h1>Bienvenue sur mon site</h1>
-    Je me nomme Clement CARDARELLI, je suis actuellement étudiant en informatique à Ingesup.<br/>
-    Ce site a pour vocation de tranmettre mes experiences, personnelles et professionnelles sous la forme d'article de blog.
+    {% for user in users %}
+        {{ user.cv.nom }} {{ user.cv.prenom }}<br/>
+    {% endfor %}
 {% endblock %}

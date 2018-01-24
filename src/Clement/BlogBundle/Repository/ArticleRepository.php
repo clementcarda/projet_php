@@ -10,12 +10,12 @@ namespace Clement\BlogBundle\Repository;
  */
 class ArticleRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function findByArticle($id){
+   /* public function findByArticle($id){
         $qp = $this->createQueryBuilder('c')
-            ->where('q.auteur_id = '.$id);
+            ->where('c.article_id = '.$id);
 
         return $qp->getQuery()->getArrayResult();
-    }
+    }*/
 
     public function findAllByArray($titre = null){
         $qp = $this->createQueryBuilder('a');

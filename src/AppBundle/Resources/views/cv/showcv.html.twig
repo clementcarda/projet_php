@@ -1,46 +1,38 @@
-{% extends 'AppBundle::layout.html.twig' %}
-
-{% block title %}Clément CARDARELLI{% endblock %}
-
-{% block body %}
+<div>
+    <h1>{{ cv.nom }} {{ cv.prenom }}</h1>
+</div>
+<div class="myinfo">
     <div>
-        <h1>Etudiant en Informatique</h1>, <br/>
-        curieux et organisé
+        <img src="{{ asset('assets/img/profile.JPG') }}" class="mypic">
     </div>
-    <div class="myinfo">
-        <div>
-            <img src="{{ asset('assets/img/profile.JPG') }}" class="mypic">
-        </div>
-        <div class="mypinfo">
-            {{ cv.adresse }}, <br/>
-            {{ cv.codePostal }} {{ cv.ville }} <br class="bigbr"/>
-            {{ cv.telephone }} <br class="bigbr"/>
-            {{ cv.mail }} <br class="bigbr"/>
-            Permis B
+    <div class="mypinfo">
+        {{ cv.adresse }}, <br/>
+        {{ cv.codePostal }} {{ cv.ville }} <br class="bigbr"/>
+        {{ cv.telephone }} <br class="bigbr"/>
+        {{ cv.mail }} <br class="bigbr"/>
 
-        </div>
     </div>
-    <div class="mydesc">
-        <div class="myform">
-            <h2>Formations</h2>
-            {% for form in cv.formations %}
-                {{ form.duree }} : {{ form.nom }}<br/>
-                {{ form.commentaire }}<br class="bigbr"/>
-            {% endfor %}
-        </div>
-        <div class="mycomp">
-            <h2>Competences</h2>
-            {% for competence in cv.competences %}
-                {{ competence.nom }}    <progress value="{{ competence. niveau}}" min="0" max="100"></progress><br/>
-                {{ competence.commentaire }}<br class="bigbr"/>
-            {% endfor %}
-        </div>
-        <div class="myexp">
-            <h2>Experience professionnel</h2>
-            {% for experience in cv.experiences %}
-                {{ experience.periode }} : {{ experience.poste }} chez {{ experience.organisme }}<br/>
-                {{ experience.commentaire }}<br class="bigbr"/>
-            {% endfor %}
-        </div>
+</div>
+<div class="mydesc">
+    <div class="myform bg-blue">
+        <h2>Formations</h2>
+        {% for form in cv.formations %}
+            {{ form.duree }} : {{ form.nom }}<br/>
+            {{ form.commentaire }}<br class="bigbr"/>
+        {% endfor %}
     </div>
-{% endblock %}
+    <div class="mycomp">
+        <h2>Competences</h2>
+        {% for competence in cv.competences %}
+            {{ competence.nom }}    <progress value="{{ competence. niveau}}" min="0" max="100"></progress><br/>
+            {{ competence.commentaire }}<br class="bigbr"/>
+        {% endfor %}
+    </div>
+    <div class="myexp">
+        <h2>Experience professionnel</h2>
+        {% for experience in cv.experiences %}
+            {{ experience.periode }} : {{ experience.poste }} chez {{ experience.organisme }}<br/>
+            {{ experience.commentaire }}<br class="bigbr"/>
+        {% endfor %}
+    </div>
+</div>

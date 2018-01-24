@@ -26,6 +26,13 @@ class User extends BaseUser
     private $commentaires;
 
     /**
+     * @var \AppBundle\Entity\InfoCV
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\InfoCV", mappedBy="auteur")
+     */
+    private $cv;
+
+    /**
      * Add commentaire
      *
      * @param \Clement\BlogBundle\Entity\Commentaire $comm
@@ -62,5 +69,25 @@ class User extends BaseUser
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * set cv
+     *
+     * @param \AppBundle\Entity\InfoCV
+     */
+    public function setCv(\AppBundle\Entity\InfoCV $cv)
+    {
+        $this->cv = $cv;
+    }
+
+    /**
+     * Get cv
+     *
+     * @return \AppBundle\Entity\InfoCV
+     */
+    public function getCv()
+    {
+        return $this->cv;
     }
 }

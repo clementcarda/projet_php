@@ -7,22 +7,25 @@
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet"/>
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/logo.png') }}" />
     {% endblock %}
-    <title>{% block title %}Clément CARDARELLI{% endblock %}</title>
+    <title>{% block title %}YouSeeMe{% endblock %}</title>
 </head>
 <body>
 
         <nav class="navbar navbar-default">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="{{ path('homepage') }}">Clément CARDARELLI</a>
+                    <a class="navbar-brand" href="{{ path('homepage') }}">YouSeeMee</a>
                 </div>
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                 <ul class="nav navbar-nav">
                     <li><a href="{{ path('showcv') }}">cv</a></li>
-                    <li><a href="{{ path('blog_homepage') }}">blog</a> </li>
+                    <li><a href="{{ path('list_user') }}">utilisateurs</a> </li>
                     {% if is_granted("ROLE_SUPER_ADMIN") %}
                         <li><a href="{{ path("sonata_admin_dashboard") }}">administration</a> </li>
                     {% endif %}
                 </ul>
+                {% endif %}
+
                 <ul class="nav navbar-nav navbar-right">
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                         <li>

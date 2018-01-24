@@ -1,0 +1,18 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block title %} {{ parent() }} | Mon CV {% endblock %}
+
+{% block body %}
+
+    <div>
+        <a href="{{ path('editcv') }}">editer</a>
+    </div>
+    {% if cv %}
+        <div>
+            {% include 'AppBundle:cv:showcv.html.twig' %}
+        </div>
+
+    {% else %}
+        vous n'avez pas de cv
+    {% endif %}
+{% endblock %}

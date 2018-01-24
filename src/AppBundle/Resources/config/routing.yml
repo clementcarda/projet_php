@@ -4,4 +4,28 @@ homepage:
 
 showcv:
   path: /cv
-  defaults: {_controller: AppBundle:Cv:showCv}
+  defaults: {_controller: AppBundle:Cv:myCv}
+
+editcv:
+  path: /cv/edit
+  defaults: {_controller: AppBundle:Cv:editCv}
+
+edit_formation:
+  path: /cv/edit/formation/{id}
+  defaults: {_controller: AppBundle:Cv:editFormation}
+  requirements:
+    id: '\d+'
+edit_competence:
+  path: /cv/edit/competence/{id}
+  defaults: {_controller: AppBundle:Cv:editCompetence}
+  requirements:
+    id: '\d+'
+edit_experience:
+  path: /cv/edit/experience/{id}
+  defaults: {_controller: AppBundle:Cv:editExperience}
+  requirements:
+    id: '\d+'
+
+list_user:
+  path: /users
+  defaults: {_controller: AppBundle:Default:listUser}

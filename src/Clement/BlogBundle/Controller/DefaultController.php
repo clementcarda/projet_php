@@ -83,13 +83,10 @@ class DefaultController extends Controller
 
         }
 
-        $commentaires = $this->getDoctrine()
-            ->getRepository(Commentaire::class)->findByArticle($id);
 
         return $this->render('ClementBlogBundle:Default:article.html.twig', [
             'article' => $article,
-            'form' => $form->createView(),
-            'commentaires' => $commentaires
+            'form' => $form->createView()
         ]);
     }
 }
