@@ -2,6 +2,8 @@
 
 {% block body %}
     {% for user in users %}
-        {{ user.cv.nom }} {{ user.cv.prenom }}<br/>
+        {% if user.cv and user.id != myId %}
+            <a href="{{ path('show_other_cv', {'userID': user.id}) }}">{{ user.cv.nom }} {{ user.cv.prenom }}</a><br/>
+        {% endif %}
     {% endfor %}
 {% endblock %}

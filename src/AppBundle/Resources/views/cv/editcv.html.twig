@@ -3,38 +3,50 @@
 
 {% block body %}
     <div>
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        {{ form_end(form) }}
+        <div class="onLeft">
+            <img src="{{ asset(current_pic) }}" class="ltlpic">
+        </div>
+        <div class="onRight">
+            {{ form_start(picform) }}
+            {{ form_widget(picform) }}
+            {{ form_end(picform) }}
+        </div>
     </div>
-    {% if cv %}
+    <div>
         <div>
-            <h2>Formation</h2>
-            {% if cv.formations %}
-                {% for formation in cv.formations %}
-                    {{ formation.nom }} <a href="{{ path('edit_formation', {'id': formation.id}) }}">editer</a><br/>
-                {% endfor %}
-            {% endif %}
-            <a href="{{ path('edit_formation', {'id': 0}) }}">ajouter</a>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
         </div>
-        <div>
-            <h2>Competence</h2>
-            {% if cv.competences %}
-                {% for competence in cv.competences %}
-                    {{ competence.nom }} <a href="{{ path('edit_competence', {'id': competence.id}) }}">editer</a><br/>
-                {% endfor %}
-            {% endif %}
-            <a href="{{ path('edit_competence', {'id': 0}) }}">ajouter</a>
-        </div>
-        <div>
-            <h2>Experience</h2>
-            {% if cv.experiences %}
-                {% for experience in cv.experiences %}
-                    {{ experience.poste }} <a href="{{ path('edit_experience', {'id': experience.id}) }}">editer</a><br/>
-                {% endfor %}
-            {% endif %}
-            <a href="{{ path('edit_experience', {'id': 0}) }}">ajouter</a>
-        </div>
-    {% endif %}
+        {% if cv %}
+            <div>
+                <h2>Formation</h2>
+                {% if cv.formations %}
+                    {% for formation in cv.formations %}
+                        {{ formation.nom }} <a href="{{ path('edit_formation', {'id': formation.id}) }}">editer</a><br/>
+                    {% endfor %}
+                {% endif %}
+                <a href="{{ path('edit_formation', {'id': 0}) }}">ajouter</a>
+            </div>
+            <div>
+                <h2>Competence</h2>
+                {% if cv.competences %}
+                    {% for competence in cv.competences %}
+                        {{ competence.nom }} <a href="{{ path('edit_competence', {'id': competence.id}) }}">editer</a><br/>
+                    {% endfor %}
+                {% endif %}
+                <a href="{{ path('edit_competence', {'id': 0}) }}">ajouter</a>
+            </div>
+            <div>
+                <h2>Experience</h2>
+                {% if cv.experiences %}
+                    {% for experience in cv.experiences %}
+                        {{ experience.poste }} <a href="{{ path('edit_experience', {'id': experience.id}) }}">editer</a><br/>
+                    {% endfor %}
+                {% endif %}
+                <a href="{{ path('edit_experience', {'id': 0}) }}">ajouter</a>
+            </div>
+        {% endif %}
+    </div>
 
 {% endblock %}

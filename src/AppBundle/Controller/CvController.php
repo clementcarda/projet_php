@@ -17,35 +17,75 @@ use AppBundle\form\CompetenceType;
 use AppBundle\form\ExperienceProfessionnelleType;
 use AppBundle\form\FormationType;
 use AppBundle\form\InfoCVType;
+use FOS\UserBundle\Model\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 
 
 class CvController extends Controller
 {
-    public function myCvAction(Request $request)
+    public function showCvAction(Request $request, $userID = null)
     {
-        //Récupération du cv portant l'id de l'utilisateur
-        $id = $this->getUser()->getId();
         $em = $this->getDoctrine()->getManager();
-        $cv = $em->getRepository('AppBundle:InfoCv')->find($id);
+        $user = $this->getUser();
+
+        if ($userID)
+        {
+            $user = $em->find('ClementBlogBundle:User', $userID);
+
+        }
+
+
+        $fs = new Filesystem();
+        $username = $user->getUsername();
+        $picname = $user->getImage();
+
+        //Récupération du cv portant l'id de l'utilisateur
+        $id = $user->getId();
+
+        $cv = $em->getRepository('AppBundle:InfoCv')->findOneBy(array('auteur' => $user));
+
+        //test si l'utilisateur à ajouté une photo de profile
+        if ($fs->exists($this->getParameter('profile_folder').$id.$username.'/'.$picname))
+        {
+            $pic = 'assets/profile/'.$id.$username.'/'.$picname;
+        }
+        else
+        {
+            $pic = 'assets/img/profile-default.png';
+        }
 
         return $this->render('AppBundle:cv:showMyCv.html.twig', [
             'cv' => $cv,
+            'image' => $pic,
+            'myid' => $this->getUser()->getId(),
         ]);
     }
 
     public function editCvAction(Request $request)
     {
+        $user = $this->getUser();
+
         //récupération des données du User courant
         $em = $this->getDoctrine()->getManager();
-        $myInfo = $em->getRepository('AppBundle:InfoCv')->find($this->getUser()->getId());
+        $myInfo = $em->getRepository('AppBundle:InfoCv')->findOneBy(array('auteur' => $user));
 
 
         //création d'un formulaire sur le model de InfoCvType
         $infoCv = new InfoCV();
         $form = $this->createForm(InfoCVType::class, $infoCv);
         $form->handleRequest($request);
+
+        //création d'un formulaire pour photo
+        $picForm = $this->createFormBuilder()
+            ->add('new_image', FileType::class)
+            ->add('submit', SubmitType::class, array('label' => 'Submit'))
+            ->getForm();
+        $picForm->handleRequest($request);
 
         //vérification si le form à été validé
         if ($form->isSubmitted() && $form->isValid())
@@ -79,8 +119,40 @@ class CvController extends Controller
             $form->get('mail')->setData($myInfo->getMail());
         }
 
+        //Vérification si image upload
+        if ($picForm->isSubmitted() && $picForm->isValid())
+        {
+            //génère un nouveau nom d'image
+            $fs = new Filesystem();
+            if ($fs->exists($this->getParameter('profile_folder').$user->getId().$user->getUsername().'/'.$user->getImage()))
+            {
+                $fs->remove($this->getParameter('profile_folder').$user->getId().$user->getUsername().'/'.$user->getImage());
+            }
+
+            //pousse l'image sous son dossier picture
+            $folder = $this->getParameter('profile_folder').$user->getId().$user->getUsername();
+            $pic = $picForm->get('new_image')->getData();
+            $picName = 'profile.'.$pic->guessExtension();
+
+            //Sauvegarde image dans le dossier utilisateur
+            $user->setImage($picName);
+            $em->persist($user);
+            $em->flush();
+
+            $pic->move(
+                $folder,
+                $picName
+            );
+
+
+        }
+
+        $currentPic = 'assets/profile/'.$user->getId().$user->getUsername().'/'.$user->getImage();
+
         return $this->render('AppBundle:cv:editcv.html.twig', [
             'form' => $form->createView(),
+            'picform' => $picForm->createView(),
+            'current_pic' => $currentPic,
             'cv' => $myInfo
         ]);
     }
@@ -119,6 +191,7 @@ class CvController extends Controller
 
 
         }
+
 
         return $this->render('AppBundle:cv:editFormation.html.twig', [
             'form' => $form->createView()

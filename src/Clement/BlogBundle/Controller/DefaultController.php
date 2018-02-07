@@ -40,6 +40,7 @@ class DefaultController extends Controller
 
         $session->set('recherche', null);
 
+
         return $this->render('ClementBlogBundle:Default:index.html.twig', [
             'articles' => $articles,
             'form' => $form->createView()

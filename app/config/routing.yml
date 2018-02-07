@@ -2,6 +2,7 @@ clement_blog:
     resource: "@ClementBlogBundle/Resources/config/routing.yml"
     prefix:   /blog/
 
+
 app:
     resource: '@AppBundle/Resources/config/routing.yml'
     prefix: /

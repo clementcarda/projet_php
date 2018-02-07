@@ -3,7 +3,7 @@
 </div>
 <div class="myinfo">
     <div>
-        <img src="{{ asset('assets/img/profile.JPG') }}" class="mypic">
+        <img src="{{ asset(image) }}" class="mypic">
     </div>
     <div class="mypinfo">
         {{ cv.adresse }}, <br/>
@@ -24,7 +24,7 @@
     <div class="mycomp">
         <h2>Competences</h2>
         {% for competence in cv.competences %}
-            {{ competence.nom }}    <progress value="{{ competence. niveau}}" min="0" max="100"></progress><br/>
+            {{ competence.nom }} : {{ competence. niveau}}<br/>
             {{ competence.commentaire }}<br class="bigbr"/>
         {% endfor %}
     </div>

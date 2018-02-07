@@ -31,7 +31,7 @@ class Competence
     /**
      * @var int
      *
-     * @ORM\Column(name="niveau", type="integer")
+     * @ORM\Column(name="niveau", type="string")
      */
     private $niveau;
 

@@ -12,7 +12,7 @@ class DefaultController extends Controller
 
     public function indexAction(Request $request)
     {
-        // replace this example code with whatever you need
+
         if ($this->getUser()){
             return $this->redirectToRoute('blog_homepage');
         } else {
@@ -25,10 +25,12 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         //récupération de tous les Users
-        $user = $em->getRepository('ClementBlogBundle:User')->findAll();
+        $users = $em->getRepository('ClementBlogBundle:User')->findAll();
+        $myId = $this->getUser()->getID();
 
         return $this->render('AppBundle:default:index.html.twig', [
-            'users' => $user
+            'users' => $users,
+            'myId' => $myId
         ]);
     }
 }

@@ -3,11 +3,12 @@
 {% block title %} {{ parent() }} | Mon CV {% endblock %}
 
 {% block body %}
-
-    <div>
-        <a href="{{ path('editcv') }}">editer</a>
-    </div>
     {% if cv %}
+        {% if myid == cv.auteur.id %}
+            <div>
+                <a href="{{ path('editcv') }}">editer</a>
+            </div>
+        {% endif %}
         <div>
             {% include 'AppBundle:cv:showcv.html.twig' %}
         </div>

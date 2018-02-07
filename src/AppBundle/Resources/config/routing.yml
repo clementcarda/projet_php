@@ -4,7 +4,11 @@ homepage:
 
 showcv:
   path: /cv
-  defaults: {_controller: AppBundle:Cv:myCv}
+  defaults: {_controller: AppBundle:Cv:showCv}
+
+show_other_cv:
+  path: /cv/show/{userID}
+  defaults: {_controller: AppBundle:Cv:showCv}
 
 editcv:
   path: /cv/edit

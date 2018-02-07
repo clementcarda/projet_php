@@ -10,6 +10,7 @@ namespace AppBundle\form;
 
 use AppBundle\Entity\Competence;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,7 +21,13 @@ class CompetenceType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('niveau')
+            ->add('niveau', ChoiceType::class, array(
+                'choices' => array(
+                    'Débutant' => 'Débutant',
+                    'Intermédiaire' => 'Intermédiaire',
+                    'Avancé' => 'Avancé'
+                )
+            ))
             ->add('commentaire')
             ->add('Ajouter', SubmitType::class);
     }

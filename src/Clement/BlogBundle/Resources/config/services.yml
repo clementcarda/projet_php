@@ -1,3 +1,4 @@
 services:
 #    clement_blog.example
-
+parameters:
+    profile_folder: '%kernel.project_dir%/web/assets/profile/'

@@ -33,6 +33,14 @@ class User extends BaseUser
     private $cv;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="profile_picture", type="string", length=255, nullable=true)
+     */
+    private $image;
+
+
+    /**
      * Add commentaire
      *
      * @param \Clement\BlogBundle\Entity\Commentaire $comm
@@ -82,12 +90,31 @@ class User extends BaseUser
     }
 
     /**
-     * Get cv
+     * get cv
      *
      * @return \AppBundle\Entity\InfoCV
      */
     public function getCv()
     {
         return $this->cv;
+    }
+
+    /**
+     * set image
+     *
+     * @param string
+     */
+    public function setImage(string $image)
+    {
+        $this->image = $image;
+    }
+
+    /**
+     * get image
+     *
+     * @return string
+     */
+    public function getImage(){
+        return $this->image;
     }
 }

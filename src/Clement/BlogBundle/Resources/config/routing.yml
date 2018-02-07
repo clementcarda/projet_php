@@ -1,6 +1,7 @@
 blog_homepage:
     path:     /
     defaults: { _controller: ClementBlogBundle:Default:index }
+
 blog_showarticle:
     path: /article/{id}
     defaults: {_controller: ClementBlogBundle:Default:showArticle}
